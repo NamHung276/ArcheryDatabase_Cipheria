@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archery Score Recording</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Archery Score Recording</h1>
+    <form id="archeryForm">
+      <h2>Player Information</h2>
+      <label for="firstName">First Name:</label>
+      <input type="text" id="firstName" name="firstName" required>
+
+      <label for="middleName">Middle Name (optional):</label>
+      <input type="text" id="middleName" name="middleName">
+
+      <label for="lastName">Last Name:</label>
+      <input type="text" id="lastName" name="lastName" required>
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" min="1" max="100" required>
+
+      <label for="club">Club:</label>
+      <input type="text" id="club" name="club" required>
+
+      <h2>Shooting Information</h2>
+      <label for="date">Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="round">Round:</label>
+      <input type="text" id="round" name="round" required>
+
+      <label for="distance">Distance (m):</label>
+      <input type="number" id="distance" name="distance" min="1" max="100" required>
+
+      <label for="target">Target Face (cm):</label>
+      <input type="number" id="target" name="target" min="20" max="200" required>
+
+      <label for="category">Category (Age & Gender):</label>
+      <select id="category" name="category" required>
+        <option value="">--Select Category--</option>
+        <option value="female_open">Female Open</option>
+        <option value="male_open">Male Open</option>
+        <option value="50_female">50+ Female</option>
+        <option value="50_male">50+ Male</option>
+        <option value="60_female">60+ Female</option>
+        <option value="60_male">60+ Male</option>
+        <option value="70_female">70+ Female</option>
+        <option value="70_male">70+ Male</option>
+        <option value="under21_female">Under 21 Female</option>
+        <option value="under21_male">Under 21 Male</option>
+        <option value="under18_female">Under 18 Female</option>
+        <option value="under18_male">Under 18 Male</option>
+        <option value="under16_female">Under 16 Female</option>
+        <option value="under16_male">Under 16 Male</option>
+        <option value="under14_female">Under 14 Female</option>
+        <option value="under14_male">Under 14 Male</option>
+      </select>
+
+      <label for="division">Division (Equipment):</label>
+      <select id="division" name="division" required>
+        <option value="">--Select Division--</option>
+        <option value="recurve">Recurve</option>
+        <option value="compound">Compound</option>
+        <option value="recurve_barebow">Recurve Barebow</option>
+        <option value="compound_barebow">Compound Barebow</option>
+        <option value="longbow">Longbow</option>
+      </select>
+
+      <button type="submit">Submit</button>
+      <button type="reset" class="small">Reset</button>
+    </form>
+  </div>
+
+  <script>
+    document.getElementById("archeryForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      const firstName = document.getElementById("firstName").value;
+      const middleName = document.getElementById("middleName").value;
+      const lastName = document.getElementById("lastName").value;
+      const age = document.getElementById("age").value;
+      const club = document.getElementById("club").value;
+      const date = document.getElementById("date").value;
+      const round = document.getElementById("round").value;
+      const distance = document.getElementById("distance").value;
+      const target = document.getElementById("target").value;
+      const category = document.getElementById("category").options[document.getElementById("category").selectedIndex].text;
+      const division = document.getElementById("division").options[document.getElementById("division").selectedIndex].text;
+
+      const fullName = middleName ? `${firstName} ${middleName} ${lastName}` : `${firstName} ${lastName}`;
+
+      // Save form data to localStorage
+      localStorage.setItem("archeryFormData", JSON.stringify({
+        fullName,
+        age,
+        club,
+        date,
+        round,
+        distance,
+        target,
+        category,
+        division
+      }));
+
+      // Redirect to review page
+      window.location.href = "check.html";
+    });
+  </script>
+</body>
+</html>
