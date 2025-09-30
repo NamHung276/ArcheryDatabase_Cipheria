@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Archery Score Board</title>
+  <link rel="stylesheet" href="score_board.css">
+</head>
+<body>
+
+  <h1>Archery Score Board</h1>
+  <div class="board">
+    <button onclick="addScore('X')">X</button>
+    <button onclick="addScore(10)">10</button>
+    <button onclick="addScore(9)">9</button>
+    <button onclick="addScore(8)">8</button>
+    <button onclick="addScore(7)">7</button>
+    <button onclick="addScore(6)">6</button>
+    <button onclick="addScore(5)">5</button>
+    <button onclick="addScore(4)">4</button>
+    <button onclick="addScore(3)">3</button>
+    <button onclick="addScore(2)">2</button>
+    <button onclick="addScore(1)">1</button>
+    <button onclick="addScore(0)">M</button>
+    <button class="reset" onclick="resetBoard()">Reset</button>
+  </div>
+
+  <div class="output">
+    <p><strong>Total Score:</strong> <span id="total">0</span></p>
+    <p><strong>Arrows:</strong> <span id="arrows">0</span></p>
+    <p><strong>X Count:</strong> <span id="xcount">0</span></p>
+    <p><strong>Scores:</strong> <span id="list"></span></p>
+  </div>
+
+  <script>
+    let total = 0;
+    let arrows = 0;
+    let list = [];
+    let xcount = 0;
+
+    function addScore(score) {
+      if (score === 'X') {
+        total += 10;
+        xcount++;
+        list.push('X');
+      } else {
+        total += score;
+        list.push(score);
+      }
+      arrows++;
+      updateBoard();
+    }
+
+    function resetBoard() {
+      total = 0;
+      arrows = 0;
+      list = [];
+      xcount = 0;
+      updateBoard();
+    }
+
+    function updateBoard() {
+      document.getElementById("total").textContent = total;
+      document.getElementById("arrows").textContent = arrows;
+      document.getElementById("xcount").textContent = xcount;
+      document.getElementById("list").textContent = list.join(", ");
+    }
+  </script>
+
+</body>
+</html>
